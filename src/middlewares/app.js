@@ -1,8 +1,8 @@
 import { apiRequest } from "../actions/api";
 import { LOGIN } from "../actions/auth";
 
-//const SERVER_URL = `https://vaishnavenclavebackend.herokuapp.com`;
-const SERVER_URL = `http://localhost:8080`;
+onst SERVER_URL = `https://vaishnavenclavebackend.herokuapp.com`;
+// const SERVER_URL = `http://localhost:8080`;
 
 export const appMiddleware = () => (next) => (action) => {
   next(action);
