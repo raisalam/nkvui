@@ -30,6 +30,7 @@ import MessagePopperButton from "./MessagePopperButton";
 import SideDrawer from "./SideDrawer";
 import Balance from "./Balance";
 import NavigationDrawer from "../../../shared/components/NavigationDrawer";
+import { useDispatch } from "react-redux";
 
 const styles = (theme) => ({
   appBar: {
@@ -127,11 +128,19 @@ const styles = (theme) => ({
 });
 
 function NavBar(props) {
-  const { selectedTab, messages, classes, width, openAddBalanceDialog } = props;
+  const {
+    selectedTab,
+    messages,
+    classes,
+    width,
+    openAddBalanceDialog,
+    logout,
+  } = props;
   // Will be use to make website more accessible by screen readers
   const links = useRef([]);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isSideDrawerOpen, setIsSideDrawerOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const openMobileDrawer = useCallback(() => {
     setIsMobileOpen(true);
@@ -205,7 +214,11 @@ function NavBar(props) {
       name: "Logout",
       icon: {
         desktop: (
-          <PowerSettingsNewIcon className="text-white" fontSize="small" />
+          <PowerSettingsNewIcon
+            className="text-white"
+            fontSize="small"
+            onClick={() => dispatch({ type: "LOGOUT" })}
+          />
         ),
         mobile: <PowerSettingsNewIcon className="text-white" />,
       },
@@ -361,5 +374,8 @@ NavBar.propTypes = {
   classes: PropTypes.object.isRequired,
   openAddBalanceDialog: PropTypes.func.isRequired,
 };
+const mapStateToProps = (state) => ({
+  ...state,
+});
 
 export default withWidth()(withStyles(styles, { withTheme: true })(NavBar));

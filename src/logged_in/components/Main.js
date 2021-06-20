@@ -41,9 +41,8 @@ function Main(props) {
   const [Dropzone, setDropzone] = useState(null);
   const [hasFetchedDropzone, setHasFetchedDropzone] = useState(false);
   const [DateTimePicker, setDateTimePicker] = useState(null);
-  const [hasFetchedDateTimePicker, setHasFetchedDateTimePicker] = useState(
-    false
-  );
+  const [hasFetchedDateTimePicker, setHasFetchedDateTimePicker] =
+    useState(false);
   const [transactions, setTransactions] = useState([]);
   const [statistics, setStatistics] = useState({ views: [], profit: [] });
   const [posts, setPosts] = useState([]);

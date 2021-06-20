@@ -2,6 +2,9 @@ import React, { useState, useCallback, useRef, Fragment } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { withRouter } from "react-router-dom";
+import { login } from "../../../actions/auth";
+import { connect } from "react-redux";
+
 import {
   TextField,
   Button,
@@ -36,7 +39,7 @@ const styles = (theme) => ({
   },
 });
 
-function LoginDialog(props) {
+const LoginDialog = (props) => {
   const {
     setStatus,
     history,
@@ -44,31 +47,24 @@ function LoginDialog(props) {
     onClose,
     openChangePasswordDialog,
     status,
+    isAuthUser,
+    isLoading,
+    error,
   } = props;
-  const [isLoading, setIsLoading] = useState(false);
+
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const loginEmail = useRef();
   const loginPassword = useRef();
-
+  console.log("isAuthUser ", isAuthUser, error);
+  if (isAuthUser) {
+    history.push("/c/dashboard");
+  }
+  console.log("isLoading = ", isLoading);
   const login = useCallback(() => {
-    setIsLoading(true);
-    setStatus(null);
-    if (loginEmail.current.value !== "test@web.com") {
-      setTimeout(() => {
-        setStatus("invalidEmail");
-        setIsLoading(false);
-      }, 1500);
-    } else if (loginPassword.current.value !== "HaRzwc") {
-      setTimeout(() => {
-        setStatus("invalidPassword");
-        setIsLoading(false);
-      }, 1500);
-    } else {
-      setTimeout(() => {
-        history.push("/c/dashboard");
-      }, 150);
-    }
-  }, [setIsLoading, loginEmail, loginPassword, history, setStatus]);
+    const email = loginEmail.current.value;
+    const password = loginPassword.current.value;
+    props.login({ email, password });
+  }, [loginEmail, loginPassword, props]);
 
   return (
     <Fragment>
@@ -87,7 +83,7 @@ function LoginDialog(props) {
             <TextField
               variant="outlined"
               margin="normal"
-              error={status === "invalidEmail"}
+              error={props?.error?.data?.status === 500}
               required
               fullWidth
               label="Email Address"
@@ -96,12 +92,11 @@ function LoginDialog(props) {
               autoComplete="off"
               type="email"
               onChange={() => {
-                if (status === "invalidEmail") {
-                  setStatus(null);
+                if (props?.error?.data?.status === 500) {
                 }
               }}
               helperText={
-                status === "invalidEmail" &&
+                props?.error?.data?.status === 500 &&
                 "This email address isn't associated with an account."
               }
               FormHelperTextProps={{ error: true }}
@@ -117,7 +112,6 @@ function LoginDialog(props) {
               autoComplete="off"
               onChange={() => {
                 if (status === "invalidPassword") {
-                  setStatus(null);
                 }
               }}
               helperText={
@@ -137,7 +131,11 @@ function LoginDialog(props) {
             <FormControlLabel
               className={classes.formControlLabel}
               control={<Checkbox color="primary" />}
-              label={<Typography variant="body1">Remember me</Typography>}
+              label={
+                <Typography variant="body1">
+                  Remember me {props?.error?.data?.error}
+                </Typography>
+              }
             />
             {status === "verificationEmailSend" ? (
               <HighlightedInformation>
@@ -193,7 +191,7 @@ function LoginDialog(props) {
       />
     </Fragment>
   );
-}
+};
 
 LoginDialog.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -203,5 +201,11 @@ LoginDialog.propTypes = {
   history: PropTypes.object.isRequired,
   status: PropTypes.string,
 };
+const mapStateToProps = (state) => ({
+  ...state,
+});
 
-export default withRouter(withStyles(styles)(LoginDialog));
+//export default withRouter(withStyles(styles)(LoginDialog));
+export default withRouter(
+  connect(mapStateToProps, { login })(withStyles(styles)(LoginDialog))
+);
