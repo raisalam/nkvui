@@ -112,49 +112,24 @@ function HeadSection(props) {
             >
               <div className={classNames(classes.containerFix, "container")}>
                 <Box justifyContent="space-between" className="row">
-                  <Grid item xs={12} md={5}>
-                    <Box
-                      display="flex"
-                      flexDirection="column"
-                      justifyContent="space-between"
-                      height="100%"
-                    >
-                      <Box mb={4}>
-                        <Typography
-                          variant={isWidthUp("lg", width) ? "h3" : "h4"}
-                        >
-                          Contact Rais for building a SaaS app using Material-UI
-                        </Typography>
-                      </Box>
-                      <div>
-                        <Box mb={2}>
-                          <Typography
-                            variant={isWidthUp("lg", width) ? "h6" : "body1"}
-                            color="textSecondary"
-                          >
-                            Lorem ipsum dolor sit amet, consetetur sadipscing
-                            elitr, sed diam nonumy eirmod tempor invidunt
-                          </Typography>
-                        </Box>
-                        <Button
-                          variant="contained"
-                          color="secondary"
-                          fullWidth
-                          className={classes.extraLargeButton}
-                          classes={{ label: classes.extraLargeButtonLabel }}
-                          href="https://github.com/dunky11/react-saas-template"
-                        >
-                          Download from GitHub
-                        </Button>
-                      </div>
-                    </Box>
+                  <Grid item md={6}>
+                    <ZoomImage
+                      src={`${process.env.PUBLIC_URL}/images/img/vaishnavimg.jpeg`}
+                      className={classes.image}
+                      alt="header example"
+                    />
                   </Grid>
                   <Hidden smDown>
                     <Grid item md={6}>
-                      <ZoomImage
-                        src={`${process.env.PUBLIC_URL}/images/logged_out/headerImage.jpg`}
-                        className={classes.image}
-                        alt="header example"
+                      <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3510.4752066208016!2d77.07413881507678!3d28.374711682520346!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d23834d9f67b7%3A0x37d91a4ce7c1111d!2sVaishnav%20Enclave!5e0!3m2!1sen!2sin!4v1624178367907!5m2!1sen!2sin"
+                        width="600"
+                        height="450"
+                        frameBorder="0"
+                        style={{ border: 0 }}
+                        allowFullScreen=""
+                        aria-hidden="false"
+                        tabIndex="0"
                       />
                     </Grid>
                   </Hidden>

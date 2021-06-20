@@ -8,7 +8,7 @@ import {
   Button,
   Hidden,
   IconButton,
-  withStyles
+  withStyles,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import HomeIcon from "@material-ui/icons/Home";
@@ -17,26 +17,26 @@ import LockOpenIcon from "@material-ui/icons/LockOpen";
 import BookIcon from "@material-ui/icons/Book";
 import NavigationDrawer from "../../../shared/components/NavigationDrawer";
 
-const styles = theme => ({
+const styles = (theme) => ({
   appBar: {
     boxShadow: theme.shadows[6],
-    backgroundColor: theme.palette.common.white
+    backgroundColor: theme.palette.common.white,
   },
   toolbar: {
     display: "flex",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   menuButtonText: {
     fontSize: theme.typography.body1.fontSize,
-    fontWeight: theme.typography.h6.fontWeight
+    fontWeight: theme.typography.h6.fontWeight,
   },
   brandText: {
     fontFamily: "'Baloo Bhaijaan', cursive",
-    fontWeight: 400
+    fontWeight: 400,
   },
   noDecoration: {
-    textDecoration: "none !important"
-  }
+    textDecoration: "none !important",
+  },
 });
 
 function NavBar(props) {
@@ -47,29 +47,34 @@ function NavBar(props) {
     handleMobileDrawerOpen,
     handleMobileDrawerClose,
     mobileDrawerOpen,
-    selectedTab
+    selectedTab,
   } = props;
   const menuItems = [
     {
       link: "/",
       name: "Home",
-      icon: <HomeIcon className="text-white" />
+      icon: <HomeIcon className="text-white" />,
     },
     {
       link: "/blog",
       name: "Blog",
-      icon: <BookIcon className="text-white" />
+      icon: <BookIcon className="text-white" />,
+    },
+    {
+      link: "/resident",
+      name: "resident",
+      icon: <BookIcon className="text-white" />,
     },
     {
       name: "Register",
       onClick: openRegisterDialog,
-      icon: <HowToRegIcon className="text-white" />
+      icon: <HowToRegIcon className="text-white" />,
     },
     {
       name: "Login",
       onClick: openLoginDialog,
-      icon: <LockOpenIcon className="text-white" />
-    }
+      icon: <LockOpenIcon className="text-white" />,
+    },
   ];
   return (
     <div className={classes.root}>
@@ -82,7 +87,7 @@ function NavBar(props) {
               display="inline"
               color="primary"
             >
-              Wa
+              Ra
             </Typography>
             <Typography
               variant="h4"
@@ -90,7 +95,7 @@ function NavBar(props) {
               display="inline"
               color="secondary"
             >
-              Ver
+              is
             </Typography>
           </div>
           <div>
@@ -104,7 +109,7 @@ function NavBar(props) {
               </IconButton>
             </Hidden>
             <Hidden smDown>
-              {menuItems.map(element => {
+              {menuItems.map((element) => {
                 if (element.link) {
                   return (
                     <Link
@@ -157,7 +162,7 @@ NavBar.propTypes = {
   mobileDrawerOpen: PropTypes.bool,
   selectedTab: PropTypes.string,
   openRegisterDialog: PropTypes.func.isRequired,
-  openLoginDialog: PropTypes.func.isRequired
+  openLoginDialog: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(memo(NavBar));
