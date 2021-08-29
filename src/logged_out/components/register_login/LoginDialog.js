@@ -144,9 +144,9 @@ const LoginDialog = (props) => {
               </HighlightedInformation>
             ) : (
               <HighlightedInformation>
-                Email is: <b>test@web.com</b>
+                Email is: <b>rais7jmi@gmail.com</b>
                 <br />
-                Password is: <b>HaRzwc</b>
+                Password is: <b>rais</b>
               </HighlightedInformation>
             )}
           </Fragment>
