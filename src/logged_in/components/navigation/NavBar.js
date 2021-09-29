@@ -193,7 +193,7 @@ function NavBar(props) {
     },
     {
       link: "/c/subscription",
-      name: "Subscription",
+      name: "Residents",
       onClick: closeMobileDrawer,
       icon: {
         desktop: (
@@ -247,7 +247,7 @@ function NavBar(props) {
                 display="inline"
                 color="primary"
               >
-                Wa
+                Ra
               </Typography>
               <Typography
                 variant="h4"
@@ -255,7 +255,7 @@ function NavBar(props) {
                 display="inline"
                 color="secondary"
               >
-                Ver
+                is
               </Typography>
             </Hidden>
           </Box>

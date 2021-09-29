@@ -5,11 +5,13 @@ import SettingsArea from "./SettingsArea";
 import UserDataArea from "./UserDataArea";
 import AccountInformationArea from "./AccountInformationArea";
 import StatisticsArea from "./StatisticsArea";
+import SocietyArea from "./SocietyArea";
 
 function Dashboard(props) {
   const {
     selectDashboard,
     CardChart,
+    SocietySummary,
     statistics,
     toggleAccountActivation,
     pushMessageToSnackbar,
@@ -22,6 +24,15 @@ function Dashboard(props) {
 
   return (
     <Fragment>
+      <Typography variant="subtitle1" gutterBottom>
+        Society Summary
+      </Typography>
+      <SocietyArea SocietySummary={SocietySummary} data={statistics} />
+      <Box mt={4}>
+      <Typography variant="subtitle1" gutterBottom>
+        Financial Summary
+      </Typography>
+      </Box>
       <StatisticsArea CardChart={CardChart} data={statistics} />
       <Box mt={4}>
         <Typography variant="subtitle1" gutterBottom>
